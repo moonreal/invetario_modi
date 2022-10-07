@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <script src="inventario.js"></script>
+   <script src="producto.js"></script>
+</head>
+<body>
+    <div>
+        <form action="">
+            
+        </form>
+    </div>
+    <div id="eldiv"></div>
+    Codigo del producto:   <input type="text" id="codigo" value=""></input></br>
+    Nombre del producto:   <input type="text" id="nombre" value=""></input></br>
+    Cantidad del producto:   <input type="number" id="cantidad"></input></br>
+    Precio del producto:   <input type="number" id="precio"></input></br>
+
+    <button id="agregar" type="button">agregar</button>
+    <button id="eliminar" type="button">Eliminar</button>
+    <button id="buscar" type="button">Buscar</button>
+    <button id="mostrar" type="button">mostrar</button>
+    <button id="mostrar_r" type="button">mostrar reverso</button>
+
+    <div id="productos"></div>
+
+    <script>
+    let miInv=new Inventario();
+    let btnAdd = document.getElementById("agregar");
+    let btnshow = document.getElementById("mostrar");
+    let btnshow_r = document.getElementById("mostrar_r");
+    let btnsearch = document.getElementById("buscar");
+    let btneliminar = document.getElementById("eliminar");
+    btnAdd.addEventListener('click',()=>{
+        let codigo = document.getElementById("codigo").value;
+        let nombre = document.getElementById("nombre").value;
+        let cantidad = document.getElementById("cantidad").value;
+        let precio = document.getElementById("precio").value;
+        let nuevop = new Producto(codigo,nombre,precio,cantidad);
+        console.log(nuevop);
+        miInv.agregar(nuevop);
+    })
+    btnshow.addEventListener('click',()=>{
+       let aux =  miInv.mostrar();
+       productos.innerHTML = JSON.stringify(aux);  
+       console.log(aux);
+       
+    })
+    btnshow_r.addEventListener('click',()=>{
+       let aux =  miInv.mostrar_inverso(); 
+       productos.innerHTML = JSON.stringify(aux);  
+
+    })
+    btnsearch.addEventListener('click',()=>{
+       let codigo = document.getElementById("codigo").value;
+       let array = miInv.mostrar();
+       let aux = miInv.buscar(codigo);
+        productos.innerHTML = JSON.stringify(aux);
+    })
+    btneliminar.addEventListener('click',()=>{
+        let codigo = document.getElementById("codigo").value;
+        miInv.eliminar(codigo);
+       
+    })
+
+    </script>
+    
+</body>
+</html>
